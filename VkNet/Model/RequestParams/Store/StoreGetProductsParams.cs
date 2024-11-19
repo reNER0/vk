@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using VkNet.Enums.StringEnums;
 
 namespace VkNet.Model;
@@ -6,6 +7,7 @@ namespace VkNet.Model;
 /// <summary>
 /// Параметры получения списка продуктов
 /// </summary>
+[Serializable]
 public class StoreGetProductsParams
 {
 	/// <summary>
