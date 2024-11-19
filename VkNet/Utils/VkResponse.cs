@@ -1,4 +1,5 @@
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Net;
 using JetBrains.Annotations;
 using Newtonsoft.Json.Linq;
@@ -339,6 +340,7 @@ public sealed class VkResponse
 	/// <returns>
 	/// Дата и время
 	/// </returns>
+	[SuppressMessage("Minor Code Smell", "S6588", Justification = "Не поддерживается в netstandard2.0")]
 	public static DateTime TimestampToDateTime(long unixTimeStamp)
 	{
 		var dt = new DateTime(1970, 1, 1, 0, 0,

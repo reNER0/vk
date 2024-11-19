@@ -1,7 +1,6 @@
 // ReSharper disable once RedundantUsingDirective
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Runtime.Serialization;
@@ -290,7 +289,7 @@ public class VkApi : IVkApi
 
 		var settings = new JsonSerializerSettings
 		{
-			Converters = new List<JsonConverter>(),
+			Converters = [],
 			ContractResolver = new DefaultContractResolver()
 			{
 				NamingStrategy = new SnakeCaseNamingStrategy()
@@ -793,7 +792,7 @@ public class VkApi : IVkApi
 
 	/// <inheritdoc />
 	public IStoreCategory Store { get; set; }
-  
+
 	/// <inheritdoc />
 	public ICallsCategory Calls { get; set; }
 

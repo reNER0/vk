@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Text.RegularExpressions;
 
@@ -19,6 +20,7 @@ public static class Url
 	/// <returns>
 	/// The combined URL.
 	/// </returns>
+	[SuppressMessage("Performance", "CA1866:Использовать перегрузку символов", Justification = "Не поддерживается в netstandard2.0")]
 	public static string Combine(params string[] parts)
 	{
 		if (parts is null)

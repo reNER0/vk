@@ -111,6 +111,8 @@ public static class Utilities
 		{
 			var jObject = json.ToJObject();
 
+
+
 			foreach (var key in keysToHide)
 			{
 				if (jObject.ContainsKey(key))

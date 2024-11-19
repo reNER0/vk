@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Runtime.Serialization;
 
@@ -25,7 +26,6 @@ public class VkParameters : Dictionary<string, string>
 	/// </summary>
 	protected VkParameters(SerializationInfo serializationInfo, StreamingContext streamingContext)
 	{
-
 	}
 
 	/// <inheritdoc />
@@ -64,7 +64,9 @@ public class VkParameters : Dictionary<string, string>
 		{
 			if (Utilities.IsStringEnum(value.GetType()))
 			{
-				Add(name, value.ToString().ToSnakeCase());
+				Add(name, value.ToString()
+					.ToSnakeCase());
+
 				return;
 			}
 
@@ -151,6 +153,7 @@ public class VkParameters : Dictionary<string, string>
 	/// </summary>
 	/// <param name="name"> Имя параметра запроса. </param>
 	/// <param name="nullableDateTime"> Значение параметра. </param>
+	[SuppressMessage("Minor Code Smell", "S6588", Justification = "Не поддерживается в netstandard2.0")]
 	public void Add(string name, DateTime? nullableDateTime)
 	{
 		Remove(key: name);

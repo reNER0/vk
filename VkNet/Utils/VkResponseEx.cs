@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -31,14 +32,14 @@ public static class VkResponseEx
 	{
 		if (response is null)
 		{
-			return new(new List<T>());
+			return new([]);
 		}
 
 		var responseArray = (VkResponseArray) response;
 
 		if (responseArray is null) //TODO: V3022 http://www.viva64.com/en/w/V3022 Expression 'responseArray == null' is always false.
 		{
-			return new(new List<T>());
+			return new([]);
 		}
 
 		return responseArray.Select(selector)
@@ -67,14 +68,14 @@ public static class VkResponseEx
 	{
 		if (response is null)
 		{
-			return new(new List<T>());
+			return new([]);
 		}
 
 		var responseArray = (VkResponseArray) response;
 
 		if (responseArray is null) //TODO: V3022 http://www.viva64.com/en/w/V3022 Expression 'responseArray == null' is always false.
 		{
-			return new(new List<T>());
+			return new([]);
 		}
 
 		return responseArray.Select(selector)
@@ -94,14 +95,14 @@ public static class VkResponseEx
 	{
 		if (response is null)
 		{
-			return new(new List<T>());
+			return new([]);
 		}
 
 		var responseArray = (VkResponseArray) response;
 
 		if (responseArray is null) //TODO: V3022 http://www.viva64.com/en/w/V3022 Expression 'responseArray == null' is always false.
 		{
-			return new(new List<T>());
+			return new([]);
 		}
 
 		return responseArray.Select(x => x as T)
@@ -118,7 +119,7 @@ public static class VkResponseEx
 	/// <returns> Коллекция данных только для чтения. </returns>
 	public static ReadOnlyCollection<T> ToReadOnlyCollectionOf<T>(this IEnumerable<VkResponse> responses, Func<VkResponse, T> selector) =>
 		responses is null
-			? new(new List<T>())
+			? new([])
 			: responses.Select(selector)
 				.ToReadOnlyCollection();
 
@@ -136,14 +137,14 @@ public static class VkResponseEx
 	{
 		if (response is null)
 		{
-			return new();
+			return [];
 		}
 
 		var responseArray = (VkResponseArray) response;
 
 		if (responseArray is null) //TODO: V3022 http://www.viva64.com/en/w/V3022 Expression 'responseArray == null' is always false.
 		{
-			return new();
+			return [];
 		}
 
 		return responseArray.Select(selector)
@@ -181,7 +182,7 @@ public static class VkResponseEx
 	{
 		if (response is null)
 		{
-			return new(0, Enumerable.Empty<T>());
+			return new(0, []);
 		}
 
 		VkResponseArray data = response.ContainsKey(arrayName)
@@ -217,6 +218,7 @@ public static class VkResponseEx
 	/// <returns>
 	/// Признак валидности json
 	/// </returns>
+	[SuppressMessage("Performance", "CA1866:Использовать перегрузку символов", Justification = "Не поддерживается в netstandard2.0")]
 	public static bool IsValidJson(string input)
 	{
 		input = input.Trim();

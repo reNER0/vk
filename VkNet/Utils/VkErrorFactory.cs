@@ -22,10 +22,9 @@ public static class VkErrorFactory
 	/// </returns>
 	public static VkApiMethodInvokeException Create(VkError error)
 	{
-		var vkApiMethodInvokeExceptions = typeof(VkApiMethodInvokeException).Assembly
-			.GetTypes()
-			.FirstOrDefault(x => x.IsSubclassOf(typeof(VkApiMethodInvokeException))
-								&& HasErrorCode(x, error.ErrorCode));
+		var vkApiMethodInvokeExceptions = Array.Find(typeof(VkApiMethodInvokeException).Assembly.GetTypes(), x =>
+			x.IsSubclassOf(typeof(VkApiMethodInvokeException))
+			&& HasErrorCode(x, error.ErrorCode));
 
 		if (vkApiMethodInvokeExceptions is null)
 		{
