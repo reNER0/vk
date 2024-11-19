@@ -87,10 +87,10 @@ public sealed class AuthorizationFormHtmlParser : IAuthorizationFormHtmlParser
 	{
 		var inputs = new Dictionary<string, string>();
 
-		foreach (var node in formNode.SelectNodes("//input"))
+		foreach (var nodeAttributes in formNode.SelectNodes("//input").Select(x => x.Attributes))
 		{
-			var nameAttribute = node.Attributes["name"];
-			var valueAttribute = node.Attributes["value"];
+			var nameAttribute = nodeAttributes["name"];
+			var valueAttribute = nodeAttributes["value"];
 
 			var name = nameAttribute is not null
 				? nameAttribute.Value

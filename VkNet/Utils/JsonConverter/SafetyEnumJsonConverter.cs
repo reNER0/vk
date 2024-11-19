@@ -64,12 +64,8 @@ public class SafetyEnumJsonConverter : Newtonsoft.Json.JsonConverter
 		var methods = result.GetType()
 			.GetMethods(bindingAttr: BindingFlags.NonPublic|BindingFlags.Public|BindingFlags.Static|BindingFlags.FlattenHierarchy);
 
-		result = methods
-			.FirstOrDefault(predicate: x => x.Name == "FromJsonString")
-			?.Invoke(result, new object[]
-			{
-				$"{value}"
-			});
+		result = Array.Find(methods, x => x.Name == "FromJsonString")
+			?.Invoke(result, [$"{value}"]);
 
 		var fields = result?.GetType()
 			.GetFields();

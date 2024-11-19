@@ -27,6 +27,7 @@
 		</PackageReleaseNotes>
 		<PackageReadmeFile>README.md</PackageReadmeFile>
 		<LangVersion>latest</LangVersion>
+		<NoWarn>S1133;S1135;S2346</NoWarn>
 	</PropertyGroup>
 
 	<PropertyGroup>

@@ -10,10 +10,7 @@ namespace VkNet.Utils.JsonConverter;
 public class TolerantStringEnumConverter : StringEnumConverter
 {
 	/// <inheritdoc />
-	public TolerantStringEnumConverter()
-	{
-		NamingStrategy = new SnakeCaseNamingStrategy();
-	}
+	public TolerantStringEnumConverter() => NamingStrategy = new SnakeCaseNamingStrategy();
 
 	/// <inheritdoc />
 	public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
@@ -22,9 +19,11 @@ public class TolerantStringEnumConverter : StringEnumConverter
 		{
 			return base.ReadJson(reader, objectType, existingValue, serializer);
 		}
-		catch(System.Exception e)
+		catch (System.Exception e)
 		{
-			var parameter = serializer.Context.TryGetTypeData(typeof(TolerantStringEnumConverter), out var s) ? (bool?)s : null;
+			var parameter = serializer.Context.TryGetTypeData(typeof(TolerantStringEnumConverter), out var s)
+				? (bool?) s
+				: null;
 
 			if (IsNullableType(objectType) && parameter is true)
 			{
@@ -36,8 +35,5 @@ public class TolerantStringEnumConverter : StringEnumConverter
 		}
 	}
 
-	private static bool IsNullableType(Type t)
-	{
-		return t.IsGenericType && t.GetGenericTypeDefinition() == typeof(Nullable<>);
-	}
+	private static bool IsNullableType(Type t) => t.IsGenericType && t.GetGenericTypeDefinition() == typeof(Nullable<>);
 }

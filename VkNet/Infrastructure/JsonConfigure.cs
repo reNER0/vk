@@ -26,10 +26,9 @@ internal static class JsonConfigure
 		{
 			using var stringReader = new StringReader(answer);
 
-			using JsonReader jsonReader = new JsonTextReader(stringReader)
-			{
-				MaxDepth = null
-			};
+			using JsonReader jsonReader = new JsonTextReader(stringReader);
+
+			jsonReader.MaxDepth = null;
 
 			return JObject.Load(jsonReader);
 		}

@@ -62,5 +62,9 @@ public class VkDefaultJsonConverter : Newtonsoft.Json.JsonConverter
 	/// <c> true </c> if this instance can convert the specified object type;
 	/// otherwise, <c> false </c>.
 	/// </returns>
-	public override bool CanConvert(Type objectType) => !objectType.IsArray && objectType.IsSerializable;
+	public override bool CanConvert(Type objectType) => objectType is
+	{
+		IsArray: false,
+		IsSerializable: true
+	};
 }

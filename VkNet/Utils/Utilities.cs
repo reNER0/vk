@@ -111,14 +111,9 @@ public static class Utilities
 		{
 			var jObject = json.ToJObject();
 
-
-
-			foreach (var key in keysToHide)
+			foreach (var key in keysToHide.Where(x => jObject.ContainsKey(x)))
 			{
-				if (jObject.ContainsKey(key))
-				{
-					jObject[key] = hidden;
-				}
+				jObject[key] = hidden;
 			}
 
 			return jObject.ToString(Formatting.Indented);
@@ -223,6 +218,7 @@ public static class Utilities
 		{
 			return null;
 		}
+
 		return t.IsGenericType && t.GetGenericTypeDefinition() == typeof(Nullable<>);
 	}
 
@@ -237,11 +233,13 @@ public static class Utilities
 	{
 		var isNull = IsNullableType(t.GenericTypeArguments.FirstOrDefault());
 		StringEnumAttribute myAttribute = null;
+
 		if (isNull is null)
 		{
 			isNull = true;
 		}
-		if(isNull is false)
+
+		if (isNull is false)
 		{
 			myAttribute = (StringEnumAttribute) Attribute.GetCustomAttribute(t.GenericTypeArguments.FirstOrDefault(),
 				typeof(StringEnumAttribute));
@@ -263,11 +261,13 @@ public static class Utilities
 	{
 		var isNull = IsNullableType(t.GenericTypeArguments.FirstOrDefault());
 		JsonConverterAttribute myAttribute = null;
+
 		if (isNull is null)
 		{
 			isNull = true;
 		}
-		if(isNull is false)
+
+		if (isNull is false)
 		{
 			myAttribute = (JsonConverterAttribute) Attribute.GetCustomAttribute(t.GenericTypeArguments.FirstOrDefault(),
 				typeof(JsonConverterAttribute));
