@@ -149,8 +149,10 @@ public class WallPostParams
 	public bool? CloseComments { get; set; }
 
 	/// <summary>
-	/// Период времени, в течение которого запись будет доступна только для донов.
-	/// Возможные значения:
+	/// Период времени в секундах, в течение которого запись будет доступна только для донов.
+	/// </summary>
+	/// <remarks>
+	/// Примеры значений:
 	/// -1 — исключительно для донов.
 	/// 86400 — на 1 день.
 	/// 172800 — на 2 дня.
@@ -159,8 +161,8 @@ public class WallPostParams
 	/// 432000 — на 5 дней.
 	/// 518400 — на 6 дней.
 	/// 604800 — на 7 дней.
-	/// </summary>
-	[JsonProperty("close_comments")]
+	/// </remarks>
+	[JsonProperty("donut_paid_duration")]
 	public int? DonutPaidDuration { get; set; }
 
 	/// <summary>
