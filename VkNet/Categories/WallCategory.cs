@@ -223,6 +223,9 @@ public partial class WallCategory : IWallCategory
 			"close_comments", @params.CloseComments
 		},
 		{
+			"donut_paid_duration", @params.DonutPaidDuration
+		},
+		{
 			"mute_notifications", @params.MuteNotifications
 		},
 		{
